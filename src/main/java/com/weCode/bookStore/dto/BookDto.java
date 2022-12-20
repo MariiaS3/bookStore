@@ -10,15 +10,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class BookDto {
 
-    // private Integer id;//UUID
+    private Integer id;//UUID
 
     private String title;
 
-    // private String description;
+    private String description;
 
-    // private int  releaseYear;
+    private int  releaseYear;
 
 }
