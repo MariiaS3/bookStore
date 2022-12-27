@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import com.weCode.bookStore.dto.BookDto;
 import com.weCode.bookStore.service.BookService;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -39,5 +40,15 @@ public class BookControllerTest {
     private BookDto getBookDto(){
         return BookDto.builder().title("test title").description("test description").id(10).releaseYear(2020).build();
 
+    }
+
+    @Test
+    void shouldRetornBookDtoListWhenGetBooksTitleColled(){
+        List<BookDto> bookDtos = new ArrayList<>();
+        bookDtos.add(getBookDto());
+        when(bookService.getBooksByTitle(anyString())).thenReturn(bookDtos);
+        ResponseEntity<List<BookDto>> books = bookController.getBooksByTitle("test title");
+        assertThat(books.getBody()).isNotNull();
+        assertThat(books.getBody().size()).isEqualTo(1);
     }
 }

@@ -13,8 +13,8 @@ import org.modelmapper.ModelMapper;
 import com.weCode.bookStore.dto.BookDto;
 import com.weCode.bookStore.model.Book;
 import com.weCode.bookStore.model.repository.BookRepository;
-import com.weCode.bookStore.service.BookService;
 
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +45,17 @@ public class BookServiceTest {
         .hasFieldOrPropertyWithValue("releaseYear",2020);
     }
 
+    @Test
+    void shoulReturnBooksByBookTitleIgnoreCase(){
+        List<Book> books = new ArrayList<>();
+        Book book= getBook();
+        books.add(getBook());
+        BookDto bookDto = getBookDto();
+        when(bookRepository.findBookByTitleIgnoreCase(anyString())).thenReturn(books);
+        when(modelMapper.map(book, BookDto.class)).thenReturn(bookDto);
+        List<BookDto> bookDtoList = bookService.getBooksByTitle("test title");
+        assertThat(bookDtoList.size()).isEqualTo(1);
+    }
 
     private Book getBook(){
         return Book.builder().title("test title").description("test description").id(10).releaseYear(2020).build();
