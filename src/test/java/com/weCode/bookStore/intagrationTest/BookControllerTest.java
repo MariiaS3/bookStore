@@ -12,6 +12,7 @@ import com.weCode.bookStore.BookStoreApplication;
 import com.weCode.bookStore.dto.BookDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.isNotNull;
 
 @SpringBootTest(classes = BookStoreApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -28,7 +29,15 @@ public class BookControllerTest {
     void shouldRetornBooksWhenGetBookApiColled(){
         BookDto[] listOfBooks = testRestTemplate.getForObject("http://localhost:"+port+"/api/v1/books", BookDto[].class);
         assertThat(listOfBooks).isNotNull();
-        assertThat(listOfBooks.length).isEqualTo(2);
+        assertThat(listOfBooks.length).isEqualTo(18);
+    }
+
+    @Test
+    @Sql(scripts = {"classpath:InsertInitialBookRecordForTest.sql"})
+    void shouldReturnOneBookWhenCalledWithTestTitle(){
+        BookDto[] listOfBooks = testRestTemplate.getForObject("http://localhost:"+port+ "/api/v1/books/test title", BookDto[].class);
+        assertThat(listOfBooks).isNotNull();
+        assertThat(listOfBooks.length).isEqualTo(1);
     }
 
 }
