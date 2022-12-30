@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.crypto.password.PasswordEncoder;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.weCode.bookStore.dto.AccountDto;
@@ -15,18 +15,18 @@ import com.weCode.bookStore.repository.AccountRepository;
 public class AccountService {
     
     private final AccountRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    // private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-    public AccountService(AccountRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public AccountService(AccountRepository userRepository, /*PasswordEncoder passwordEncoder,*/ ModelMapper modelMapper) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        // this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
     }
     
     public UUID addUser(AccountDto userDto){
         Account user = modelMapper.map(userDto, Account.class);
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(/*passwordEncoder.encode(userDto.getPassword())*/"password");
         user.setId(null);
 
         Account createUser = userRepository.saveAndFlush(user);

@@ -11,7 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.weCode.bookStore.BookStoreApplication;
-import com.weCode.bookStore.config.JwtUtil;
+// import com.weCode.bookStore.config.JwtUtil;
 import com.weCode.bookStore.dto.BookDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,20 +30,20 @@ public class BookControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    // @Autowired
+    // private JwtUtil jwtUtil;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     void setUpHeader(){
-        String token = jwtUtil.genetateToken(new User(
-            "peter@gmail.com", passwordEncoder.encode("password"), new ArrayList<>()
-        ));
+        // String token = jwtUtil.genetateToken(new User(
+        //     "peter@gmail.com", passwordEncoder.encode("password"), new ArrayList<>()
+        // ));
 
         testRestTemplate.getRestTemplate().setInterceptors(
             Collections.singletonList(((request, body,execution) ->{
-                request.getHeaders().add("Authorization", "Bearer "+token);
+                request.getHeaders().add("Authorization", "Bearer "+"token");
                 return execution.execute(request, body);
             }))
         );
