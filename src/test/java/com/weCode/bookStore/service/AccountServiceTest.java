@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -16,18 +15,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.weCode.bookStore.dto.UserDto;
-import com.weCode.bookStore.model.User;
-import com.weCode.bookStore.repository.UserRepository;
+import com.weCode.bookStore.dto.AccountDto;
+import com.weCode.bookStore.model.Account;
+import com.weCode.bookStore.repository.AccountRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTest {
+public class AccountServiceTest {
 
     @InjectMocks
-    private UserService userService;
+    private AccountService userService;
 
     @Mock
-    private UserRepository userRepository;
+    private AccountRepository userRepository;
 
     @Mock
     private ModelMapper modelMapper;
@@ -48,8 +47,8 @@ public class UserServiceTest {
         assertThat(uuid).isEqualTo(id);
     }
 
-    private UserDto getUserDto() {
-        return UserDto.builder()
+    private AccountDto getUserDto() {
+        return AccountDto.builder()
                 .password("password")
                 .id(UUID.randomUUID())
                 .name("username")
@@ -57,8 +56,8 @@ public class UserServiceTest {
                 .build();
     }
 
-    private User getUser(UUID id) {
-        return User.builder()
+    private Account getUser(UUID id) {
+        return Account.builder()
                 .password("password")
                 .id(id)
                 .name("username")
@@ -73,7 +72,7 @@ public class UserServiceTest {
         when(userRepository.findByEmail(anyString())).thenReturn(getUser(id));
         when(modelMapper.map(any(), any())).thenReturn(getUserDto());
 
-        UserDto email = userService.getUserByEmail("exmple@gmail.com");
+        AccountDto email = userService.getUserByEmail("exmple@gmail.com");
 
         assertThat(email).isNotNull();
         assertThat(email.getName()).isEqualTo("username");
@@ -82,6 +81,7 @@ public class UserServiceTest {
 
     @Test
     void shouldThrowErrorWhenEmailIsNotExist() {
+
         when(userRepository.findByEmail(anyString())).thenThrow(new RuntimeException("error"));
   
         assertThatThrownBy(()-> userService.getUserByEmail("exmple@gmail.com")).isInstanceOf(RuntimeException.class);

@@ -6,21 +6,26 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.weCode.bookStore.dto.AccountDto;
+
 @Service
-public class UserDetailService implements UserDetailsService {
+public class AccountDetailService implements UserDetailsService {
 
-    private final PasswordEncoder  passwordEncoder;
+    private final AccountService userService;
 
-    public UserDetailService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
+
+    public AccountDetailService(AccountService userService) {
+        this.userService = userService;
     }
+
+
     //this is functionwhich is used by spring security for loading user from db
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-        return new User("peter@gmail.com", passwordEncoder.encode("password"), new ArrayList<>());
+        AccountDto userByEmail = userService.getUserByEmail(username);
+        return new User(userByEmail.getEmail(), userByEmail.getPassword(), new ArrayList<>());
     }
 
 }

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "UserDto", description = "all details about Users")
-public class UserDto {
+public class AccountDto {
 
-    @ApiModelProperty(readOnly = true, value = "UUID", dataType = "UUID", example = "b5607d38-8fc1-43ef-b44e-34967083c80a", notes = "The database generated uuid for user id", required = true)
+    @ApiModelProperty(readOnly = true, value = "UUID", dataType = "UUID", example = "b5607d38-8fc1-43ef-b44e-34967083c80", notes = "The database generated uuid for user id", required = true)
     private UUID id;
 
     @ApiModelProperty( value = "name", dataType = "String", example = "User name", notes = "User name", required = true)

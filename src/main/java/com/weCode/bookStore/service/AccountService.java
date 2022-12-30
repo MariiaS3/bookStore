@@ -7,38 +7,40 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.weCode.bookStore.dto.UserDto;
-import com.weCode.bookStore.model.User;
-import com.weCode.bookStore.repository.UserRepository;
+import com.weCode.bookStore.dto.AccountDto;
+import com.weCode.bookStore.model.Account;
+import com.weCode.bookStore.repository.AccountRepository;
 
 @Service
-public class UserService {
+public class AccountService {
     
-    private final UserRepository userRepository;
+    private final AccountRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
+    public AccountService(AccountRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
     }
     
-    public UUID addUser(UserDto userDto){
-        User user = modelMapper.map(userDto, User.class);
+    public UUID addUser(AccountDto userDto){
+        Account user = modelMapper.map(userDto, Account.class);
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setId(null);
 
-        User createUser = userRepository.saveAndFlush(user);
+        Account createUser = userRepository.saveAndFlush(user);
+
         return createUser.getId();
     }
     
-    public UserDto getUserByEmail(String email){
-        User byEmail = userRepository.findByEmail(email);
+    public AccountDto getUserByEmail(String email){
+        Account byEmail = userRepository.findByEmail(email);
 
         if(Objects.isNull(byEmail)){
             throw new RuntimeException("user not exist with this email: " + email);
         }
-        return modelMapper.map(byEmail, UserDto.class);
+        return modelMapper.map(byEmail, AccountDto.class);
+
     }
 }

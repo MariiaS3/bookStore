@@ -16,18 +16,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-import com.weCode.bookStore.service.UserDetailService;
+import com.weCode.bookStore.service.AccountDetailService;
 
 @Deprecated
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter  {
     
-    private final UserDetailService userDetailService;
+    private final AccountDetailService userDetailService;
     private final PasswordEncoder passwordEncoder;
     private final JwtRequestFilter jwtRequestFilter;
 
 
-    public SecurityConfigurer(UserDetailService userDetailService, PasswordEncoder passwordEncoder,
+    public SecurityConfigurer(AccountDetailService userDetailService, PasswordEncoder passwordEncoder,
             JwtRequestFilter jwtRequestFilter) {
         this.userDetailService = userDetailService;
         this.passwordEncoder = passwordEncoder;
@@ -63,6 +63,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter  {
                     .and()
                     .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                     .authorizeRequests().antMatchers("/api/v1/login").permitAll()
+                    .antMatchers("/api/v1/register").permitAll()
                     .anyRequest().authenticated();
     }
 
