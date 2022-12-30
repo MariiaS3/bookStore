@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.weCode.bookStore.dto.BookDto;
 import com.weCode.bookStore.model.Book;
-import com.weCode.bookStore.model.repository.BookRepository;
+import com.weCode.bookStore.repository.BookRepository;
 
 
 @Service

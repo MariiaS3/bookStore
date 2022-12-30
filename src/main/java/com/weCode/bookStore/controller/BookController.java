@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Api(value = "Book Api", tags = "Book Api", produces = "aplication/json") //tell about ......
 @RestController
-@RequestMapping("api/v1/books")
+@RequestMapping("api/v1")
 public class BookController { // this controller !!!!!!!!!!!!!
 
     @Autowired
@@ -34,7 +34,7 @@ public class BookController { // this controller !!!!!!!!!!!!!
         @ApiResponse(code = 404, message = "not found resource")
 
     }) //  posible response expected from this endpoint
-    @GetMapping //("api/v1/books") (endpoint)
+    @GetMapping("/books") //(endpoint)
     public ResponseEntity<List<BookDto>> getBooks(){
         // BookDto book = BookDto.builder().title("My first book title").build();
         // BookDto bookSecond = BookDto.builder().title("Second book title").build(); 

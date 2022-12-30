@@ -12,7 +12,7 @@ import org.modelmapper.ModelMapper;
 
 import com.weCode.bookStore.dto.BookDto;
 import com.weCode.bookStore.model.Book;
-import com.weCode.bookStore.model.repository.BookRepository;
+import com.weCode.bookStore.repository.BookRepository;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;

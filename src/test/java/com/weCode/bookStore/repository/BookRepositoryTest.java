@@ -12,7 +12,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.weCode.bookStore.model.Book;
-import com.weCode.bookStore.model.repository.BookRepository;
+import com.weCode.bookStore.repository.BookRepository;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
