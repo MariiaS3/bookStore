@@ -21,11 +21,15 @@ public class BookService {
     private final ModelMapper modelMapper;
 
     public BookService(BookRepository bookRepository, ModelMapper modelMapper){
+		System.out.println("--------------------- service----------------------------");
+
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
     }
 
     public List<BookDto> getBooks() {
+		System.out.println("---------------------getBook service----------------------------");
+
         Iterable<Book> all = bookRepository.findAll();;
         return StreamSupport.stream(all.spliterator(),false)
                 .map(convertBookModelToBookDto())

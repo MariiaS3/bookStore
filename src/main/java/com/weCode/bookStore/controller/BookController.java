@@ -36,6 +36,8 @@ public class BookController { // this controller !!!!!!!!!!!!!
     }) //  posible response expected from this endpoint
     @GetMapping("/books") //(endpoint)
     public ResponseEntity<List<BookDto>> getBooks(){
+		System.out.println("---------------------getBooks----------------------------");
+
         // BookDto book = BookDto.builder().title("My first book title").build();
         // BookDto bookSecond = BookDto.builder().title("Second book title").build(); 
         // List<BookDto>  books = new ArrayList<>();

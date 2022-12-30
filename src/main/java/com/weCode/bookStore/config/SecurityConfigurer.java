@@ -48,6 +48,8 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+		System.out.println("---------------------configure----------------------------");
+
         http.csrf().disable()
                     .cors().configurationSource(request ->{
                         CorsConfiguration corsConfiguration = new CorsConfiguration();

@@ -9,6 +9,8 @@ public class Mapper {
 
     @Bean
     public ModelMapper modelMapper(){
+		System.out.println("---------------------mapper----------------------------");
+
         return new ModelMapper();
     }
 }
