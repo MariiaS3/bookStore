@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "Book Api", tags = "Book Api", produces = "aplication/json") //tell about ......
 @RestController
 @RequestMapping("api/v1/books")
-public class BookController { // this controller !!!!!!!!!!!!!!!!!!!!!!
+public class BookController { // this controller !!!!!!!!!!!!!
 
     @Autowired
     private BookService bookService;
