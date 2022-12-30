@@ -34,39 +34,37 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter  {
         this.jwtRequestFilter = jwtRequestFilter;
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-    }
+    // @Override
+    // protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //     auth.authenticationProvider(daoAuthenticationProvider());
+    // }
 
-    private AuthenticationProvider daoAuthenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
-    }
+    // private AuthenticationProvider daoAuthenticationProvider(){
+    //     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    //     provider.setUserDetailsService(userDetailService);
+    //     provider.setPasswordEncoder(passwordEncoder);
+    //     return provider;
+    // }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-		System.out.println("---------------------configure----------------------------");
-
-        http.csrf().disable()
-                    .cors().configurationSource(request ->{
-                        CorsConfiguration corsConfiguration = new CorsConfiguration();
-                        corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
-                        corsConfiguration.setAllowedMethods(Arrays.asList(
-                            "GET", "POST", "PUT", "DELETE", "OPTIONS"
-                        ));
-                        corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
-                        return corsConfiguration;
-                    }).and()
-                    .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                    .authorizeRequests().antMatchers("/api/v1/login").permitAll()
-                    .antMatchers("/api/v1/register").permitAll()
-                    .anyRequest().authenticated();
+        // http.csrf().disable()
+        //             .cors().configurationSource(request ->{
+        //                 CorsConfiguration corsConfiguration = new CorsConfiguration();
+        //                 corsConfiguration.setAllowedOrigins(Collections.singletonList("*"));
+        //                 corsConfiguration.setAllowedMethods(Arrays.asList(
+        //                     "GET", "POST", "PUT", "DELETE", "OPTIONS"
+        //                 ));
+        //                 corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+        //                 return corsConfiguration;
+        //             }).and()
+        //             .sessionManagement()
+        //             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        //             .and()
+        //             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+        //             .authorizeRequests().antMatchers("/api/v1/login").permitAll()
+        //             .antMatchers("/api/v1/register").permitAll()
+        //             .anyRequest().authenticated();
     }
 
     @Bean
