@@ -1,6 +1,6 @@
 # bookStore
 This is a project I did while learning application deployment.
-The frontend for this backend is the bookclient repository
+The frontend for this backend is the bookstoreclient repository
 
 <h2>Technologies</h2>
 
