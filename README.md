@@ -10,8 +10,12 @@ This is a project I did while learning application deployment.
   * Spring Boot
   * JPA
   * Hibernate
+  * Flayway
+  * Lombok
+  * Swagger
   * Mockito
   * JUnit
+  * Assertj
 ```
   
   <h4>Frontend</h4>
